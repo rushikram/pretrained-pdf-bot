@@ -21,7 +21,7 @@ def extract_text_from_pdf(file_path):
             text += page.get_text()
     return text
 
-# === Step 2: Vectorize Document ===
+
 @st.cache_resource(show_spinner=False)
 def create_vector_store(text):
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
@@ -29,7 +29,7 @@ def create_vector_store(text):
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
     return FAISS.from_documents(chunks, embeddings)
 
-# === Step 3: Build Retrieval QA Chain ===
+
 @st.cache_resource(show_spinner=False)
 def build_chatbot(_vector_db):
     generator = pipeline(
