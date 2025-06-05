@@ -100,9 +100,6 @@ For any feedback or suggestions, feel free to connect or raise issues.
 
 ---
 
-## 📌 License
-
-This project is released under the MIT License.
 
 ## RESULTS:
 ![Screenshot 2025-06-05 152729](https://github.com/user-attachments/assets/b155bd75-f259-41bd-92ee-093210651f15)
