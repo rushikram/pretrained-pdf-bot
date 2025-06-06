@@ -29,7 +29,6 @@ def create_vector_store(text):
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
     return FAISS.from_documents(chunks, embeddings)
 
-# === Step 3: Build Chatbot ===
 @st.cache_resource(show_spinner=False)
 def build_chatbot(_vector_db):
     generator = pipeline(
@@ -40,10 +39,10 @@ def build_chatbot(_vector_db):
         temperature=0.3,
     )
     llm = HuggingFacePipeline(pipeline=generator)
-    retriever = _vector_db.as_retriever(search_kwargs={"k": 3})  # Return top 3 chunks
+    retriever = _vector_db.as_retriever(search_kwargs={"k": 3})  
     return RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
-# === Streamlit UI ===
+
 st.set_page_config(page_title="📘 PDF Q&A Chatbot", layout="centered")
 st.title("📘 PDF Q&A Chatbot")
 st.write("Ask questions based on the content of `Resume_Rushik (1).pdf`.")
@@ -58,8 +57,6 @@ with st.spinner("Reading and indexing the PDF..."):
         st.stop()
 
 
-with st.expander("🔍 Preview Extracted PDF Text"):
-    st.text_area("Extracted Text", text[:3000], height=200)
 
 
 user_query = st.text_input("Enter your question:", "")
