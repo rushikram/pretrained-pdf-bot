@@ -1,20 +1,20 @@
 
-# 📘 PDF Q\&A Chatbot
+# 🤗 Friendly PDF Buddy Plus
 
-This project is a simple yet powerful chatbot application that allows users to query the contents of a PDF document using natural language. It uses open-source models and tools, ensuring full control, privacy, and customization for end users.
-
----
-
-## 🚀 Features
-
-* **PDF Text Extraction:** Uses PyMuPDF to extract text from each page of the PDF.
-* **Text Splitting:** Splits long texts into manageable chunks using LangChain's `RecursiveCharacterTextSplitter`.
-* **Semantic Embedding:** Converts text chunks to embeddings using HuggingFace’s `all-MiniLM-L6-v2`.
-* **Vector Indexing:** Stores the embeddings using FAISS for efficient similarity search.
-* **Language Model:** Uses `google/flan-t5-large` for generating responses.
-* **User Interface:** Interactive frontend built with Streamlit.
+An interactive chatbot built with Streamlit that lets you chat naturally with your PDF resume. The bot extracts and indexes the resume text, understands your questions, analyzes your sentiment, and responds with mood-aware, friendly replies — including jokes!
 
 ---
+
+## Features
+
+- Extract text from PDF resumes using PyMuPDF (`fitz`)
+- Split and embed text chunks with HuggingFace embeddings (`all-MiniLM-L6-v2`)
+- Semantic search with FAISS vector store
+- Conversational Q&A powered by `google/flan-t5-large` language model
+- Sentiment analysis using DistilBERT to detect positive, negative, or neutral mood
+- Mood-aware responses with personalized greetings, jokes, and small talk
+- Maintains chat history for a natural conversation flow
+- Simple, clean chat UI built with Streamlit and `streamlit_chat`
 
 ## 🛠️ Tech Stack
 
@@ -26,6 +26,7 @@ This project is a simple yet powerful chatbot application that allows users to q
 | Vector Store  | FAISS                                |
 | LLM Inference | HuggingFace Transformers (`flan-t5`) |
 | App Interface | Streamlit                            |
+
 
 ---
 
@@ -40,13 +41,28 @@ This project is a simple yet powerful chatbot application that allows users to q
 
 ---
 
-## 🧠 How It Works
+### How It Works
 
-1. **Load PDF** – Extracts all text from the uploaded/resident PDF.
-2. **Text Processing** – Chunks the text into overlapping sections.
-3. **Vectorization** – Embeds chunks into high-dimensional vectors.
-4. **Build QA Chain** – Uses HuggingFace model to answer queries based on retrieved relevant chunks.
-5. **User Interaction** – User types questions, and the app responds intelligently using relevant PDF content.
+1. **PDF Text Extraction**  
+   The app opens the PDF resume using PyMuPDF (`fitz`) and extracts all the text from each page.
+
+2. **Text Chunking and Embedding**  
+   The extracted text is split into smaller overlapping chunks for better context handling using LangChain's `RecursiveCharacterTextSplitter`. Each chunk is then converted into vector embeddings using the HuggingFace model `all-MiniLM-L6-v2` to capture semantic meaning.
+
+3. **Vector Store Creation**  
+   These embeddings are stored in a FAISS vector database for efficient semantic search and retrieval.
+
+4. **Conversational Retrieval Chain**  
+   When you ask a question, the chatbot retrieves relevant text chunks from the vector store and uses the language model `google/flan-t5-large` to generate a coherent answer based on the context and conversation history.
+
+5. **Sentiment Analysis and Mood Detection**  
+   The user's input is analyzed by a DistilBERT-based sentiment classifier to detect if the mood is positive, negative, or neutral.
+
+6. **Mood-Aware Response Generation**  
+   Depending on the detected sentiment, the chatbot personalizes its replies with mood-appropriate greetings, encouragement, and jokes to create a friendly, engaging experience.
+
+7. **Conversation Memory**  
+   The chatbot maintains a conversation buffer to remember the dialogue history, allowing more context-aware responses throughout the session.
 
 ---
 
@@ -73,23 +89,22 @@ streamlit run main.py
 
 ---
 
-## 📄 Example Questions to Ask
 
-* "What are the key skills listed in the resume?"
-* "Which projects has Rushik worked on?"
-* "Mention the certifications included."
 
 ---
 
 ## ✅ Requirements
 
-* Python 3.8+
-* Streamlit
-* langchain
-* transformers
-* sentence-transformers
-* faiss-cpu
-* PyMuPDF
+-Python 3.8+
+-streamlit
+-pymupdf (fitz)
+-langchain
+-transformers
+-sentence-transformers
+-faiss-cpu
+-torch
+-streamlit_chat
+
 
 ---
 
@@ -102,6 +117,8 @@ For any feedback or suggestions, feel free to connect or raise issues.
 
 
 ## RESULTS:
-![Screenshot 2025-06-06 083033](https://github.com/user-attachments/assets/ca4e3a6f-0ae2-4606-8d77-baa314ebcd19)
+
+
+![Screenshot 2025-06-09 152744](https://github.com/user-attachments/assets/7becac65-cf8a-40a8-91cc-255f18670f2f)
 
 
